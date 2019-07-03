@@ -4,7 +4,7 @@
   "description": "My workspace for react",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode production  & webpack-dev-server --open --mode development",
+    "dev": "webpack --mode production & webpack-dev-server --open --mode development",
     "bould": "webpack --mode production"
   },
   "repository": {
