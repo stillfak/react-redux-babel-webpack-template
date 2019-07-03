@@ -1,0 +1,51 @@
+{
+  "name": "webpack-learn",
+  "version": "1.0.0",
+  "description": "My workspace for react",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --mode production  & webpack-dev-server --open --mode development",
+    "bould": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stillfak/react-redux-babel-webpack-template.git"
+  },
+  "keywords": [
+    "webpack",
+    "babel",
+    "react",
+    "redux"
+  ],
+  "author": "Stillfak",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "autoprefixer": "^9.6.0",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.0.0",
+    "css-mqpacker": "^7.0.0",
+    "cssnano": "^4.1.10",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.7.0",
+    "node-sass": "^4.12.0",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.35.2",
+    "webpack-cli": "^3.3.5",
+    "webpack-dev-server": "^3.7.2"
+  },
+  "dependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "query-string": "^6.8.1",
+    "isomorphic-fetch": "^2.2.1"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 4 version"
+  ]
+}
