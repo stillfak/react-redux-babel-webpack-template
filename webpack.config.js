@@ -3,11 +3,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-    entry: './src/index.js',
+    entry: "./src/index.jsx",
     output: {
         filename: "main.js",
         path: path.resolve(__dirname, 'dist'),
-        // publicPath: "/dist"
+        // publicPath: "dist"
     },
     module: {
         rules: [
@@ -55,6 +55,23 @@ module.exports = {
                         loader: "sass-loader",
                         options: {
                             sourceMap: true,
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.(png|svg|jpg|gif)$/,
+                use: [
+                    {
+                        loader: "file-loader",
+                        options: {
+                            name(file) {
+                                if (process.env.NODE_ENV === 'development') {
+                                    return '[path][name].[ext]';
+                                }
+
+                                return '[hash].[ext]';
+                            },
                         }
                     }
                 ]
