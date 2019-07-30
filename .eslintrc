@@ -1,0 +1,58 @@
+{
+  "parser": "babel-eslint",
+  "extends":  ["airbnb"],
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+    "commonjs": true,
+    "jquery": true
+  },
+  "globals": {
+    "ymaps": false
+  },
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "webpack.config.babel.js"
+      }
+    }
+  },
+  "rules": {
+    "arrow-parens": ["error", "always"],
+    "camelcase": "off",
+    "comma-dangle": [
+      2, "always-multiline"
+    ],
+    "eol-last": 1,
+    "implicit-arrow-linebreak": "off",
+    "import/prefer-default-export": "off",
+    "import/newline-after-import": ["error", { "count": 2 }],
+    "indent": ["error", 4, { "SwitchCase": 1 }],
+    "new-cap": "off",
+    "no-bitwise": ["error", { "allow": ["~"] }],
+    "no-console": "off",
+    "no-debugger": 1,
+    "no-extra-semi": 1,
+    "no-nested-ternary": "off",
+    "no-underscore-dangle": "off",
+    "no-unreachable": "error",
+    "no-undef": "off",
+    "no-use-before-define": 1,
+    "no-unused-expressions": ["error", { "allowShortCircuit": true }],
+    "strict": 1,
+    "quotes": [ "error", "single" ],
+    "object-curly-newline": ["error", { "consistent": true }],
+    "operator-linebreak": [
+      "error", "after",
+      {
+        "overrides": {
+          "=": "after",
+          "?": "before",
+          ":": "before",
+          "&&": "before"
+        }
+      }
+    ]
+  }
+}
