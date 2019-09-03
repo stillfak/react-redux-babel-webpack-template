@@ -1,23 +1,23 @@
-import React from "react";
-import "../css/style.css";
-import "../scss/style.scss";
+import React from 'react';
+import '../../css/style.css';
+import '../scss/index.scss';
 
 
 class App extends React.PureComponent {
-
     constructor(props) {
         super(props);
     }
 
-
     render() {
-        const ob = JSONob.register[0];
-        console.log(ob);
         return (
             <div className="App">
                 <header className="App-header">
                     <p>
-                        Edit <code>src/App.js</code> and save to reload.
+                        Edit
+                        {' '}
+                        <code>src/App.js</code>
+                        {' '}
+                        and save to reload.
                     </p>
                     <a
                         className="App-link"
