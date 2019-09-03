@@ -158,13 +158,12 @@ export default {
         }),
         new webpack.ProvidePlugin(globalVisibility),
 
-        // new StyleLintPlugin({
-        //     context: DIR_SRC,
-        //     files: /\.(css|scss)$/,
-        //     fix: true,
-        //     configFile: `${DIR}/.stylelintrc`,
-        //
-        // }),
+        new StyleLintPlugin({
+            context: DIR_SRC,
+            fix: true,
+            configFile: `${DIR}/.stylelintrc`,
+
+        }),
 
         new ImageMinPlugin({
             bail: false, // Ignore errors on corrupted images

@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../css/style.css';
-import '../scss/index.scss';
+import '../../scss/index.scss';
 
 
 class App extends React.PureComponent {
