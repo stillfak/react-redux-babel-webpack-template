@@ -1,47 +1,64 @@
 import webpack from "webpack";
-import MiniCssExtractPlugin from "mini-css-extract-plugin";
 // import fs from "fs";
 import StyleLintPlugin from "stylelint-webpack-plugin";
 import ImageMinPlugin from "imagemin-webpack";
 import UglifyJsPlugin from "uglifyjs-webpack-plugin";
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-// const entryMap = [];
 
 const DIR = __dirname,
     DIR_SRC = `${DIR}/src/`,
-    DIR_DIST = `dist/`;
+    DIR_DIST = `${DIR}/dist/`,
+    JS_INDEX = `${DIR_SRC}index.jsx`,
+    HTML_INDEX = `${DIR}/index.html`;
 
-// console.log(DIR);
+console.log(typeof(DIR_DIST));
 
-// fs.readdirSync(DIR_JS)
-//     .filter(file => {
-//         return file.match(/.*\.js$/);
-//     })
-//     .forEach(f => {
-//         entryMap.push(DIR_JS + f);
-//     });
-// console.log(entryMap);
+const globalVisibility = [
+
+];
+
+const externals = {
+
+};
+
 export default {
-    entry:  DIR_SRC + "index.js",
-    // entry: entryMap,
+    entry: JS_INDEX,
     output: {
         filename: "[name].min.js",
-        path: DIR_DIST,
+        path: DIR_DIST.toString(),
+        // publicPath: "dist"
     },
-
     performance: {
         maxEntrypointSize: 512000,
         maxAssetSize: 512000
     },
+    externals: externals,
+    optimization: {
+        minimizer: [
+            new UglifyJsPlugin({
+                cache: "dist/cache",
+                parallel: true,
+                sourceMap: true,
+                extractComments: true,
+                uglifyOptions: {
+                    output: {
+                        comments: false,
+                    },
+                },
+            })
+        ],
+    },
     module: {
         rules: [
             {
-                test: /\.jsx?$/,
+                test: /\.(js|jsx)$/,
                 loader: 'babel-loader',
                 exclude: /node_modules/
             },
             {
-                test: /\.jsx?$/,
+                test: /\.(js|jsx)$/,
                 loader: 'eslint-loader',
                 options: {
                     fix: true,
@@ -108,16 +125,15 @@ export default {
                 ]
             },
             {
-                test: /\.(jpe?g|png|gif|svg)$/i,
-                use: [
-                    {
-                        loader: "file-loader",
-                        options: {
-                            name() {
-                                return "img/[hash].[ext]";
-                            }
+                test: /\.(gif|png|jpe?g|svg)$/,
+                use: [{
+                    loader: "file-loader",
+                    options: {
+                        name() {
+                            return "img/[hash].[ext]";
                         }
-                    },
+                    }
+                },
                     {
                         loader: ImageMinPlugin.loader,
                         options: {
@@ -127,41 +143,28 @@ export default {
                                 plugins: ["gifsicle"]
                             }
                         }
-                    }
-                ]
+                    }]
             }
         ]
     },
-    optimization: {
-        minimizer: [
-            new UglifyJsPlugin({
-                cache: "dist/cache",
-                parallel: true,
-                sourceMap: true,
-                extractComments: true,
-                uglifyOptions: {
-                    output: {
-                        comments: false,
-                    },
-                },
-            })
-        ],
-    },
-
     plugins: [
+        new HtmlWebpackPlugin({
+            template: HTML_INDEX,
+            inject: "body"
+        }),
         new MiniCssExtractPlugin({
-            filename: '[name].min.css',
+            filename: '[name].css',
 
         }),
-        new webpack.ProvidePlugin([
+        new webpack.ProvidePlugin(globalVisibility),
 
-        ]),
-        new StyleLintPlugin({
-            context: DIR_SRC,
-            files: /.css/,
-            fix: true,
-            configFile: `${DIR}/.stylelintrc`
-        }),
+        // new StyleLintPlugin({
+        //     context: DIR_SRC,
+        //     files: /\.(css|scss)$/,
+        //     fix: true,
+        //     configFile: `${DIR}/.stylelintrc`,
+        //
+        // }),
 
         new ImageMinPlugin({
             bail: false, // Ignore errors on corrupted images
@@ -171,4 +174,7 @@ export default {
             },
         })
     ]
+    // devServer: {
+    //   overlay: true
+    // }
 };
